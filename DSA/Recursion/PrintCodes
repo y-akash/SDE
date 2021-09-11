@@ -1,0 +1,73 @@
+Return all codes - String
+
+Assume that the value of a = 1, b = 2, c = 3, ... , z = 26. 
+You are given a numeric string S. 
+Write a program to return the list of all possible codes that can be generated from the given string.
+
+Note : The order of codes are not important. And input string does not contain 0s.
+Input format :
+A numeric string
+
+Constraints :
+1 <= Length of String S <= 10
+
+Sample Input:
+1123
+
+Sample Output:
+aabc
+kbc
+alc
+aaw
+kw
+
+
+public class solution {
+
+	// Return a string array that contains all possible codes
+	public static  String[] getCode(String input){
+		// Write your code here
+        if(input.length() == 0)	return new String[]{""};
+        int tempInt;
+        char tempChar;
+        String[] output1 = getCode(input.substring(1));
+        tempInt = input.charAt(0) - '0';
+        tempChar = (char) ('a' + tempInt - 1);
+        for(int i=0; i<output1.length; i++){
+            output1[i] = tempChar+output1[i];
+        }
+        boolean check =  false;
+        String[] output2 = new String[0];
+        if(input.length()>=2){
+            int temp = Integer.parseInt(input.charAt(0)+""+input.charAt(1));
+            if(temp>=11 && temp<=26){
+                check = true;
+                output2 = getCode(input.substring(2));
+                tempInt = temp;
+                tempChar = (char) ('a' + tempInt - 1);
+                for(int i=0; i<output2.length; i++){
+                    output2[i] = tempChar+output2[i];
+                }
+            }
+        }
+        if(check){
+            String[] output3 = new String[output1.length + output2.length];
+            int i=0;
+            while (i < output1.length){
+                output3[i]=output1[i];
+                i++;
+            }
+            int j=0;
+            while (j < output2.length){
+                output3[i] = output2[j];
+                i++;
+                j++;
+            }
+            return output3;
+        }
+        return output1;
+    }
+
+}
+
+

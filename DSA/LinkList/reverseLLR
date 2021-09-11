@@ -1,0 +1,21 @@
+Reverse LL (Recursive)
+
+public class Solution {
+
+	public static LinkedListNode<Integer> reverseLinkedListRec(LinkedListNode<Integer> head) {
+		//Your code goes here
+        if(head == null || head.next == null)	return head;
+        
+        LinkedListNode<Integer> returnHead = reverseLinkedListRec(head.next);
+        if(returnHead.next == null){
+			returnHead.next = head;
+            head.next = null;                     
+        }else{
+            LinkedListNode<Integer> tailNode = head.next;
+            tailNode.next = head;
+            head.next = null;
+        }           
+        return returnHead;
+	}
+
+}

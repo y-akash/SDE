@@ -1,0 +1,13 @@
+public static void towerOfHanoi(int disks, char sourceRod, char helperRod, char destinationRod) {
+		// Write your code here
+        if(disks == 0) return;
+
+        if(disks == 1){
+            System.out.println(sourceRod+" "+destinationRod);
+            return;
+        }
+        
+        towerOfHanoi(disks-1, sourceRod, destinationRod, helperRod);
+        System.out.println(sourceRod+" "+destinationRod);
+        towerOfHanoi(disks-1, helperRod, sourceRod, destinationRod);
+}

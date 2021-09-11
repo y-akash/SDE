@@ -1,0 +1,73 @@
+Given an integer n, using phone keypad find out all the possible strings that can be made using digits of input n.
+Return empty string for numbers 0 and 1.
+Note :  1. The order of strings are not important.
+        2. Input and output has already been managed for you. You just have to populate the output array and return the count of elements populated in the output array.
+
+Sample Input:
+
+23
+
+Sample Output:
+
+ad
+ae
+af
+bd
+be
+bf
+cd
+ce
+cf
+
+
+// it will return the combination
+public class solution {
+	static String[] keys = new String[]{"", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+	// Return a string array that contains all the possible strings
+	public static String[] keypad(int n){
+		// Write your code here
+		if (n == 0) return new String[]{""};
+        String[] smallAns = keypad(n/10);
+        n=n%10;
+        String[] out = new String[smallAns.length * keys[n].length()];
+        
+        int k = 0;
+        for(int i=0; i<keys[n].length(); i++)
+            for(int j=0; j< smallAns.length; j++)
+                out[k++] = smallAns[j] + keys[n].charAt(i);
+        return out;
+	}
+	
+}
+
+
+It will print the combination
+
+public class solution {
+	static String[] keys = new String[]{"", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+    
+	public static void printKeypad(int input){
+		// Write your code here
+        printKeypadHelper(input, "");
+	}
+    
+    private static void printKeypadHelper(int input, String output){
+        if (input == 0){
+            System.out.println(output);
+            return;
+        }
+        if(input%10 ==7 || input%10 ==9){
+            printKeypadHelper(input/10, keys[input%10].charAt(0) + output);
+            printKeypadHelper(input/10, keys[input%10].charAt(1) + output);
+            printKeypadHelper(input/10, keys[input%10].charAt(2) + output);
+            printKeypadHelper(input/10, keys[input%10].charAt(3) + output);
+        }
+		// else if(input%10 == || input%10)        
+        else{
+            printKeypadHelper(input/10, keys[input%10].charAt(0) + output);
+            printKeypadHelper(input/10, keys[input%10].charAt(1) + output);
+            printKeypadHelper(input/10, keys[input%10].charAt(2) + output);
+        }
+        
+    }
+}

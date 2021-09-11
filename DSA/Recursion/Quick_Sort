@@ -1,0 +1,25 @@
+private static void quickSortHelper(int[] input, int startIndex, int endIndex){
+    if (startIndex >= endIndex)	return;
+    int partitionIndex = partitionIndex(input, startIndex, endIndex);
+    quickSortHelper(input, startIndex, partitionIndex-1);
+    quickSortHelper(input, partitionIndex+1, endIndex);
+}
+
+private static int partitionIndex(int[] input, int startIndex, int endIndex){
+    int pivot = input[endIndex];
+    int partitionIndex = startIndex;
+    int i = startIndex;
+    while (i<endIndex){
+        if (input[i]<pivot){
+            int temp = input[i];
+            input[i] = input[partitionIndex];
+            input[partitionIndex] = temp;
+            partitionIndex++;
+        }
+        i++;
+    }
+    int temp = input[partitionIndex];
+    input[partitionIndex] = pivot;
+    input[endIndex] = temp;
+    return partitionIndex;
+}

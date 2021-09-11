@@ -1,0 +1,43 @@
+Sample Input 1:
+1 2 3 4 5 6 7
+d = 2
+
+Sample Output 1:
+3 4 5 6 7 1 2
+
+Sample Input 2:
+1 2 3 4 5 6 7
+d = 0
+1 2 3 4
+d = 2
+
+Sample Output 2:
+1 2 3 4 5 6 7
+3 4 1 2
+
+
+public class solution{
+    private static void swapElements(int[] arr, int startIndex, int endIndex){
+        int temp = arr[startIndex];
+        arr[startIndex] = arr[endIndex];
+        arr[endIndex] = temp;
+    }
+
+    private static void reverse(int[] arr, int startIndex, int endIndex){
+        while(startIndex < endIndex){
+            swapElements(arr, startIndex, endIndex);
+            startIndex++;
+            endIndex++;
+        }
+    }
+
+    public static void rotate(int[] arr, ind d){
+        if(arr.length == 0) return;
+
+        if( d >= arr.length && arr.length !=0)  d %= arr.length;
+
+        reverse(arr, 0, arr.length - 1);                // reverse full array
+        reverse(arr, 0, arr.length - d - 1);            // reverse first part
+        reverse(arr, arr.length - d, arr.length - 1);   // reverse remaining d elements of array
+    }
+}

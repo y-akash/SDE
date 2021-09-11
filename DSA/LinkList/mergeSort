@@ -1,0 +1,72 @@
+Merge Sort 
+
+
+public class Solution {
+
+	public static LinkedListNode<Integer> mergeSort(LinkedListNode<Integer> head) {
+		//Your code goes here
+        if(head == null || head.next == null)	return head;
+        
+        LinkedListNode<Integer> mid = midPoint(head);
+        
+        LinkedListNode<Integer> head1 = head;
+        LinkedListNode<Integer> head2 = mid.next;        
+        mid.next = null;   
+        
+        head1 = mergeSort(head);
+        head2 = mergeSort(head2);
+        return mergeTwoSortedLinkedLists(head1, head2);
+	}
+    
+    private static LinkedListNode<Integer> midPoint(LinkedListNode<Integer> head) {
+        //Your code goes here
+        if(head==null || head.next == null)	return head;
+        LinkedListNode<Integer> fast = head;
+        LinkedListNode<Integer> slow = head;
+        
+        while(fast.next!=null && fast.next.next!=null){
+            fast = fast.next.next;
+            slow = slow.next;
+        }
+        return slow;
+    }
+    
+    private static LinkedListNode<Integer> mergeTwoSortedLinkedLists(LinkedListNode<Integer> head1, LinkedListNode<Integer> head2) {
+        //Your code goes here
+        if(head1 == null)	return head2;
+        if(head2 == null)	return head1;
+        
+        LinkedListNode<Integer> head3;
+        LinkedListNode<Integer> tail;
+        
+        if(head1.data <= head2.data){
+            head3 = head1;
+            tail = head1;
+            head1 = head1.next;            
+        }else{
+            head3 = head2;
+            tail = head2;
+            head2 = head2.next;
+        }
+        
+        while(head1 !=null && head2!=null){
+            if(head1.data <= head2.data){
+                tail.next = head1;
+                tail = head1;
+                head1 = head1.next;
+            }else{
+                tail.next = head2;
+                tail = head2;
+                head2 = head2.next;
+            }
+        }
+        
+        if(head1 == null){
+            tail.next = head2;
+        }else if(head2 == null){
+            tail.next = head1;
+        }
+        return head3;
+    }
+
+}

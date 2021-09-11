@@ -1,0 +1,16 @@
+public class Main {
+
+    public static void main(String[] args) {
+
+        for( int n=10; n<= 10000000; n = n*10){
+            int[] input = new int[n];
+            for (int i=0; i< input.length; i++){
+                input[i] = input.length -1;
+            }
+
+            long startTime = System.currentTimeMillis();
+            // sorting algo will come here
+            long endTime = System.currentTimeMillis();
+            System.out.println("Time by particular sort for " + n + " is " + (endTime - startTime));
+        }
+}
